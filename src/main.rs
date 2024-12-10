@@ -14,6 +14,19 @@ fn dec_to_bin(mut dec: u32) -> String {
     bin
 }
 
+fn ip_address_to_bin(ip_address: &str) -> String {
+    let parts: Vec<String> = ip_address
+        .split(".")
+        // using map to change elements of parts array from decimal values as strings to binary as u32 and into string again (I guess...)
+        .map(|part| {
+            let dec = part.parse::<u32>().unwrap();
+            dec_to_bin(dec)
+        }) // end map
+        .collect();
+
+    parts.join(".")
+}
+
 fn main() {
-    println!("{}", dec_to_bin(69));
+    println!("{}", ip_address_to_bin("69.69.69.69"));
 }
